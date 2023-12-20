@@ -1,16 +1,21 @@
 import React, { useContext, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import UsersContext from "../context/UsersContext";
+import AuthContext from "../context/AuthContext";
 
 function AssignJob({ userId, setUserId, setAssignment, assignment }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [duration, setDuration] = useState("");
   const { user } = useContext(UsersContext);
+  const { uri } = useContext(AuthContext);
 
-  const handleSend = () => {
+  const handleSend = (e) => {
+    e.target.innerText = "Loading...";
+    e.target.style.backgroundColor = "lightgray";
+    e.target.disabled = true;
     const date = new Date();
-    fetch("http://localhost:5000/assignment", {
+    fetch(`${uri}/assignment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +26,7 @@ function AssignJob({ userId, setUserId, setAssignment, assignment }) {
         dateOfAssignment: date,
         dateOfSubmition: duration,
         userId: userId?._id,
-        adminId: user._id,
+        adminId: user?._id,
       }),
     })
       .then((res) => res.json())
@@ -30,7 +35,12 @@ function AssignJob({ userId, setUserId, setAssignment, assignment }) {
         alert("error");
         console.log(err);
       })
-      .finally(() => setUserId(null));
+      .finally(() => {
+        e.target.innerText = "Send";
+        e.target.style.backgroundColor = "#fa163c";
+        e.target.disabled = false;
+        setUserId(null);
+      });
   };
   return (
     <div className="asign-con">
@@ -49,11 +59,12 @@ function AssignJob({ userId, setUserId, setAssignment, assignment }) {
         </h1>
         <span>
           <CgProfile style={{ fontSize: "40px" }} />
-          <p>{userId.fullName}</p>
+          <p>{userId?.fullName}</p>
         </span>
         <br />
-        <h4>{userId.fullName} Skills:</h4>
-        <ul></ul>
+        <h4>
+          {userId?.fullName} Skills: {userId?.role}
+        </h4>
         <br />
         <form onSubmit={(e) => e.preventDefault()}>
           <label>Job Title: </label>
@@ -77,7 +88,7 @@ function AssignJob({ userId, setUserId, setAssignment, assignment }) {
             onChange={(e) => setDuration(e.target.value)}
           />
           <br />
-          <button onClick={handleSend}>send</button>
+          <button onClick={(e) => handleSend(e)}>Send</button>
           <br />
         </form>
       </div>

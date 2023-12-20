@@ -1,136 +1,34 @@
 import React from "react";
+import img from "../utils/admin.PNG";
 
 function SecondSection() {
   return (
     <div className="second-section">
-      <h2>Our courses</h2>
-      <div className="pricing">
+      <h2>Manager Dashboard</h2>
+      <br />
+      <br />
+      <div className="admin">
         <div>
-          <h3>Basic</h3>
           <p>
-            <span>$0.00</span> front end course
+            With the Manager Dashboard, you can effortlessly manage your team,
+            allocate tasks, and maintain a high level of organization within
+            your workforce. Whether it's keeping track of employee assignments
+            or ensuring smooth leave management, this tool simplifies the
+            process, leaving you more time to focus on what matters most
+            achieving your team's goals.
           </p>
-          <li>
-            <i></i>HTML/CSS
-          </li>
-          <li>
-            <i></i>JavaScript
-          </li>
-          <li>
-            <i></i>React
-          </li>
-          <li>
-            <i></i>Angula
-          </li>
-          <li>
-            <i></i>Node js
-          </li>
-          <li>
-            <i></i>express
-          </li>
-          <li>
-            <i></i>python
-          </li>
-          <li>
-            <i></i>MongoDB
-          </li>
-          <li>
-            <i></i>git/github
-          </li>
-          <li>
-            <i></i>bash
-          </li>
-          <li>
-            <i></i>Shopify
-          </li>
-          <li>
-            <i></i>jest
-          </li>
-        </div>
-        <div>
-          <h3>Standard</h3>
+          <br />
+          <p>You can login as Samuel who is a manager:</p>
           <p>
-            <span>$20.00</span> frontend/backend
+            <b>Email:</b> samuel@gmail.com
           </p>
-          <li>
-            <i></i>HTML/CSS
-          </li>
-          <li>
-            <i></i>JavaScript
-          </li>
-          <li>
-            <i></i>React
-          </li>
-          <li>
-            <i></i>Angula
-          </li>
-          <li>
-            <i></i>Node js
-          </li>
-          <li>
-            <i></i>express
-          </li>
-          <li>
-            <i></i>python
-          </li>
-          <li>
-            <i></i>MongoDB
-          </li>
-          <li>
-            <i></i>git/github
-          </li>
-          <li>
-            <i></i>bash
-          </li>
-          <li>
-            <i></i>Shopify
-          </li>
-          <li>
-            <i></i>jest
-          </li>
-        </div>
-        <div>
-          <h3>Premium</h3>
           <p>
-            <span>$25.00</span> frontend/backend & web tools
+            <b>Password:</b> samuel1234
           </p>
-          <li>
-            <i></i>HTML/CSS
-          </li>
-          <li>
-            <i></i>JavaScript
-          </li>
-          <li>
-            <i></i>React
-          </li>
-          <li>
-            <i></i>Angula
-          </li>
-          <li>
-            <i></i>Node js
-          </li>
-          <li>
-            <i></i>express
-          </li>
-          <li>
-            <i></i>python
-          </li>
-          <li>
-            <i></i>MongoDB
-          </li>
-          <li>
-            <i></i>git/github
-          </li>
-          <li>
-            <i></i>bash
-          </li>
-          <li>
-            <i></i>Shopify
-          </li>
-          <li>
-            <i></i>jest
-          </li>
         </div>
+        <span>
+          <img src={img} alt="hello" />
+        </span>
       </div>
     </div>
   );

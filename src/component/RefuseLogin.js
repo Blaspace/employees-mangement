@@ -3,11 +3,11 @@ import AuthContext from "../context/AuthContext";
 import { Outlet } from "react-router";
 
 function RefuseLogin() {
-  const { handleLogout, setAuth } = useContext(AuthContext);
+  const { handleLogout, setAuth, uri } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/refresh", {
+    fetch(`${uri}/refresh`, {
       method: "POST",
       credentials: "include",
     })

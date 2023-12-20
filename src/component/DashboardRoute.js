@@ -6,11 +6,11 @@ import AuthContext from "../context/AuthContext";
 import UsersContext from "../context/UsersContext";
 
 function DashboardRoute() {
-  const { auth } = useContext(AuthContext);
+  const { auth, uri } = useContext(AuthContext);
   const { setUser, setUsers } = useContext(UsersContext);
 
   useEffect(() => {
-    fetch("http://localhost:5000/getuser", {
+    fetch(`${uri}/getuser`, {
       method: "POST",
       credentials: "include",
     })
@@ -20,7 +20,7 @@ function DashboardRoute() {
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/getusers", {
+    fetch(`${uri}/getusers`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

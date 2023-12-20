@@ -1,6 +1,5 @@
 import React from "react";
-import img from "../utils/code.jpg";
-import imge from "../utils/computer.jpg";
+import img from "../utils/img9.webp";
 import { useNavigate } from "react-router";
 
 function Header() {
@@ -9,22 +8,17 @@ function Header() {
     <>
       <header className="header">
         <div>
-          <h1>
-            Full stack <span>web</span> development traning
-          </h1>
+          <h1>Employee Management Application</h1>
           <br />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-            dolore, enim asperiores debitis dicta dolorem maxime quis, ipsa
-            ullam quam ut dolor velit amet sit commodi ipsam laborum soluta cum!
-          </p>
+          <p>A Comprehensive Solution for Efficient Workforce Management</p>
           <br />
-          <button onClick={() => navigate("/signup")}>Register</button>
+          <button onClick={() => navigate("/login")}>Get Started</button>
         </div>
-        <div>
-          <img src={img} alt="code" className="img" />
-          <img src={imge} alt="code" className="img2" />
-        </div>
+        <section>
+          <span className="img">
+            <img src={img} alt="code" />
+          </span>
+        </section>
       </header>
     </>
   );

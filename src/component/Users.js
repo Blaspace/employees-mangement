@@ -1,41 +1,64 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import UsersContext from "../context/UsersContext";
+import AuthContext from "../context/AuthContext";
 
-function Users({ setUserId, assignment }) {
-  const { users, user } = useContext(UsersContext);
+function Users({ setUserId, assignment, setNotify }) {
+  const { users, user, setUsers } = useContext(UsersContext);
+  const { uri } = useContext(AuthContext);
+  const [newUsers, setNewUsers] = useState([]);
 
-  const Users = users?.filter((value) => {
-    return value?.role === user?.role && value?._id !== user?._id;
-  });
+  useEffect(() => {
+    if (!users) {
+      fetch(`${uri}/getusers`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setUsers(data))
+        .catch((err) => console.log(err));
+    }
+  }, []);
+
+  useEffect(() => {
+    const i = users?.filter((value) => {
+      return value?.userRole === "2000" && value?._id !== user?._id;
+    });
+    setNewUsers(i);
+  }, [users]);
 
   return (
     <>
-      <div className="list">
-        <ul className="list-header">
-          <li>user Name</li>
-          <li>User tittle</li>
-          <li>Team</li>
-          <li>jobs assigned</li>
-          <li>actions</li>
-        </ul>
-        {Users?.map((value) => {
+      <table className="list">
+        <tr className="list-header">
+          <th>User Name</th>
+          <th>User tittle</th>
+          <th>Skills</th>
+          <th>Jobs Assigned</th>
+          <th>Actions</th>
+        </tr>
+        {newUsers?.map((value) => {
           const numAssignment = assignment?.filter(
-            (ass) => ass.userId === value?._id
+            (ass) => ass?.userId === value?._id
           );
 
           return (
-            <ul key={value?._id} className="list-ul">
-              <li>{value?.fullName}</li>
-              <li>{value?.userRole === "2000" ? "Employee" : "Admin"}</li>
-              <li>{value?.role}</li>
-              <li>{numAssignment?.length}</li>
-              <li>
-                <button onClick={(e) => setUserId(value)}>Assign job</button>
-              </li>
-            </ul>
+            <tr key={value?._id} className="list-ul">
+              <td data-label="User name">{value?.fullName}</td>
+              <td data-label="User tittle">
+                {value?.userRole === "2000" ? "Employee" : "Admin"}
+              </td>
+              <td data-label="Team">{value?.role}</td>
+              <td data-label="Jobs assigned">{numAssignment?.length}</td>
+              <td data-label="Action">
+                <button onClick={(e) => setUserId(value)}>Assign Job</button>
+                <button onClick={(e) => setNotify(value)}>Notify</button>
+              </td>
+            </tr>
           );
         })}
-      </div>
+      </table>
     </>
   );
 }

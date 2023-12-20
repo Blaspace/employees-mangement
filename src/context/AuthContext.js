@@ -6,8 +6,10 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [auth, setAuth] = useState(null);
 
+  const uri = "http://localhost:5000";
+
   const handleLogout = () => {
-    fetch("http://localhost:5000/logout", {
+    fetch(`${uri}/logout`, {
       method: "POST",
       credentials: "include",
     }).then((res) => {
@@ -20,7 +22,7 @@ export function AuthProvider({ children }) {
   };
 
   const refresh = () => {
-    fetch("thhp://localhost:5000/refresh", {
+    fetch(`${uri}/refresh`, {
       method: "POST",
       credentials: "include",
     })
@@ -36,7 +38,7 @@ export function AuthProvider({ children }) {
   };
   setTimeout(refresh, 1000 * 60 * 5);
   return (
-    <AuthContext.Provider value={{ auth, setAuth, handleLogout, refresh }}>
+    <AuthContext.Provider value={{ auth, setAuth, handleLogout, refresh, uri }}>
       {children}
     </AuthContext.Provider>
   );

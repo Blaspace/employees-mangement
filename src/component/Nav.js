@@ -1,17 +1,30 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 function Nav() {
   const navigate = useNavigate();
+
+  const handleLogin = () => {
+    window.open("http://localhost:3000/login");
+  };
   return (
     <nav className="nav">
       <h1>tier</h1>
       <ul>
-        <li onClick={() => navigate("/")}>Home</li>
-        <li>Home</li>
-        <li onClick={() => navigate("/signups")}>register</li>
+        <a href="#first">
+          <li>About</li>
+        </a>
+        <a href="#second">
+          <li>Admin</li>
+        </a>
+        <a href="#third">
+          <li>Employee</li>
+        </a>
+        <a href="#fourth">
+          <li>Aim</li>
+        </a>
       </ul>
-      <button onClick={() => navigate("/login")}>Login</button>
+      <button onClick={() => handleLogin()}>Login</button>
     </nav>
   );
 }

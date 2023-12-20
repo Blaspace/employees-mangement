@@ -6,45 +6,47 @@ function List({ assignment }) {
   const { user } = useContext(UsersContext);
   const [value, setValue] = useState(null);
 
-  const userAssignment = assignment.filter((ass) => ass.userId === user._id);
+  const userAssignment = assignment?.filter(
+    (ass) => ass?.userId === user?._id && !ass?.resulved
+  );
 
   return (
-    <div className="list">
-      <ul className="list-header">
-        <li>Job Title</li>
-        <li>Job Description</li>
-        <li>Date Of Asignment</li>
-        <li>Job Duration</li>
-        <li>actions</li>
-      </ul>
+    <table className="list">
+      <tr className="list-header">
+        <th>Job Title</th>
+        <th>Job Description</th>
+        <th>Date Of Assignment</th>
+        <th>Job Duration</th>
+      </tr>
       {userAssignment?.map((value) => {
         return (
-          <ul
-            key={value._id}
+          <tr
+            key={value?._id}
             className="list-ul"
             onClick={() => setValue(value)}
           >
-            <li>
-              {value.jobTitle.slice(0, 15)}
-              {value.jobTitle.length <= 15 && "..."}
-            </li>
-            <li>
-              {value.jobDescription.slice(0, 20)}
-              {value.jobTitle.length <= 20 && "..."}
-            </li>
-            <li>
-              {value.dateOfAssignment.slice(0, 20)}
-              {value.jobTitle.length <= 20 && "..."}
-            </li>
-            <li>{value.dateOfSubmition}</li>
-            <li>
-              <button onClick={() => alert("hello")}>done</button>
-            </li>
-          </ul>
+            <td data-label="Job Title">
+              <span>{value?.jobTitle}</span>
+            </td>
+            <td data-label="Job Description">
+              <span>
+                {value?.jobDescription?.slice(0, 20)}
+                {value?.jobDescription?.length >= 20 && (
+                  <span style={{ color: "grey" }}>...</span>
+                )}
+              </span>
+            </td>
+            <td data-label="Date Of Assignment">
+              <span> {value?.dateOfAssignment.slice(0, 10)}</span>
+            </td>
+            <td data-label="Job Duration">
+              <span>{value?.dateOfSubmition}</span>
+            </td>
+          </tr>
         );
       })}
       <AssignmentBox value={value} setValue={setValue} />
-    </div>
+    </table>
   );
 }
 

@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import AuthContext from "../context/AuthContext";
 
 function Signup() {
   const [fullName, setFullname] = useState("");
+  const { uri } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -10,7 +12,7 @@ function Signup() {
   const selectRef = useRef();
 
   const handleSignUp = () => {
-    fetch("http://localhost:5000/signup", {
+    fetch(`${uri}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -58,13 +60,6 @@ function Signup() {
           name="password"
           onChange={(e) => setPassword(e.target.value)}
         />
-        <br />
-        <select ref={selectRef}>
-          <option>Select your role</option>
-          <option>Front end</option>
-          <option>Back end</option>
-          <option>Full stack</option>
-        </select>
         <br />
         <button onClick={handleSignUp}>Signup</button>
         <br />

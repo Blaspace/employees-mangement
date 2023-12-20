@@ -3,12 +3,12 @@ import AuthContext from "../context/AuthContext";
 import { Outlet } from "react-router-dom";
 
 const HandlePersistentLogin = () => {
-  const { handleLogout, setAuth, auth } = useContext(AuthContext);
+  const { handleLogout, setAuth, auth, uri } = useContext(AuthContext);
 
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const persistentlogin = () => {
-      fetch(`http://localhost:5000/refresh`, {
+      fetch(`${uri}/refresh`, {
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
