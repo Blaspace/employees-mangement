@@ -7,6 +7,7 @@ export function AuthProvider({ children }) {
   const [auth, setAuth] = useState(null);
 
   //const uri = "http://localhost:5000";
+
   const uri = "https://management-server-jy4l.onrender.com";
 
   const handleLogout = () => {
