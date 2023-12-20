@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
@@ -9,7 +9,6 @@ function Signup() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const selectRef = useRef();
 
   const handleSignUp = () => {
     fetch(`${uri}/signup`, {
@@ -20,7 +19,6 @@ function Signup() {
         email,
         phone,
         password,
-        role: selectRef.current.value,
       }),
     }).then(() => navigate("/login"));
   };

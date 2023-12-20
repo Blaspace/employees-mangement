@@ -5,7 +5,7 @@ function Nav() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    window.open("http://localhost:3000/login");
+    navigate("/login");
   };
   return (
     <nav className="nav">
