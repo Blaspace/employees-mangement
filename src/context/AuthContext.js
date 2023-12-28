@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
 
   //const uri = "http://localhost:5000";
 
-  const uri = "https://management-server-jy4l.onrender.com";
+  const uri = "https://employee-server-5yst.onrender.com";
 
   const handleLogout = () => {
     fetch(`${uri}/logout`, {
