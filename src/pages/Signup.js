@@ -10,7 +10,11 @@ function Signup() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.target.innerText = "Loading...";
+    e.target.style.backgroundColor = "grey";
+    e.target.disabled = true;
+
     fetch(`${uri}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -20,7 +24,23 @@ function Signup() {
         phone,
         password,
       }),
-    }).then(() => navigate("/login"));
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else if (res.status === 409) {
+          throw "You already have an acount";
+        } else {
+          throw "Server Error";
+        }
+      })
+      .then((data) => navigate("/login"))
+      .catch((err) => console.log(err))
+      .finally(() => {
+        e.target.innerText = "Login";
+        e.target.style.backgroundColor = "#fa163c";
+        e.target.disabled = false;
+      });
   };
 
   return (
@@ -59,7 +79,7 @@ function Signup() {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <button onClick={handleSignUp}>Signup</button>
+        <button onClick={(e) => handleSignUp(e)}>Signup</button>
         <br />
         <p>
           already have an account <NavLink to={"/login"}>Login</NavLink>

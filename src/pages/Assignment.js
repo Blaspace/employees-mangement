@@ -39,6 +39,7 @@ function Assignment() {
       setUserAssignment(j);
     }
   }, [assignment]);
+  console.log(userAssignment?.length);
 
   return (
     <div style={{}} className="body">

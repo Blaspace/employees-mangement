@@ -22,14 +22,20 @@ function Login() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        } else if (res.status === 401) {
+          throw "Wrong email/password";
+        } else {
+          throw "Server error";
+        }
+      })
       .then((data) => {
         setAuth(data);
         navigate("/dashboard");
       })
-      .catch((err) => {
-        alert("wrong user name/password");
-      })
+      .catch((err) => alert(err))
       .finally(() => {
         e.target.innerText = "Login";
         e.target.style.backgroundColor = "#fa163c";
@@ -44,7 +50,7 @@ function Login() {
         <br />
         <label>Email</label>
         <input
-          type="text"
+          type="email"
           placeholder="email..."
           onChange={(e) => {
             setEmail(e.target.value);
@@ -53,7 +59,7 @@ function Login() {
         <br />
         <label>Password</label>
         <input
-          type="text"
+          type="password"
           placeholder="password..."
           onChange={(e) => {
             setPassword(e.target.value);

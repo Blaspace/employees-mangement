@@ -18,33 +18,37 @@ function List({ assignment }) {
         <th>Date Of Assignment</th>
         <th>Job Duration</th>
       </tr>
-      {userAssignment?.map((value) => {
-        return (
-          <tr
-            key={value?._id}
-            className="list-ul"
-            onClick={() => setValue(value)}
-          >
-            <td data-label="Job Title">
-              <span>{value?.jobTitle}</span>
-            </td>
-            <td data-label="Job Description">
-              <span>
-                {value?.jobDescription?.slice(0, 20)}
-                {value?.jobDescription?.length >= 20 && (
-                  <span style={{ color: "grey" }}>...</span>
-                )}
-              </span>
-            </td>
-            <td data-label="Date Of Assignment">
-              <span> {value?.dateOfAssignment.slice(0, 10)}</span>
-            </td>
-            <td data-label="Job Duration">
-              <span>{value?.dateOfSubmition}</span>
-            </td>
-          </tr>
-        );
-      })}
+      {userAssignment?.length ? (
+        userAssignment?.map((value) => {
+          return (
+            <tr
+              key={value?._id}
+              className="list-ul"
+              onClick={() => setValue(value)}
+            >
+              <td data-label="Job Title">
+                <span>{value?.jobTitle}</span>
+              </td>
+              <td data-label="Job Description">
+                <span>
+                  {value?.jobDescription?.slice(0, 20)}
+                  {value?.jobDescription?.length >= 20 && (
+                    <span style={{ color: "grey" }}>...</span>
+                  )}
+                </span>
+              </td>
+              <td data-label="Date Of Assignment">
+                <span> {value?.dateOfAssignment.slice(0, 10)}</span>
+              </td>
+              <td data-label="Job Duration">
+                <span>{value?.dateOfSubmition}</span>
+              </td>
+            </tr>
+          );
+        })
+      ) : (
+        <h2 style={{ textAlign: "center" }}>No Assignment for You</h2>
+      )}
       <AssignmentBox value={value} setValue={setValue} />
     </table>
   );
