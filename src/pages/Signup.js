@@ -35,7 +35,7 @@ function Signup() {
         }
       })
       .then((data) => navigate("/login"))
-      .catch((err) => console.log(err))
+      .catch((err) => alert(err))
       .finally(() => {
         e.target.innerText = "Login";
         e.target.style.backgroundColor = "#fa163c";
