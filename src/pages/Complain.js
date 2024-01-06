@@ -2,14 +2,16 @@ import React, { useState, useContext, useEffect } from "react";
 import AllComplain from "../component/AllComplain";
 import { AiOutlineLoading } from "react-icons/ai";
 import UsersContext from "../context/UsersContext";
+import AuthContext from "../context/AuthContext";
 
 function Complain() {
   const [loading, setLoading] = useState(true);
   const [complain, setComplain] = useState([]);
   const { user, users, assignment } = useContext(UsersContext);
+  const { uri } = useContext(AuthContext);
 
   const handleGetComplains = () => {
-    fetch("http://localhost:5000/allcomplain", {
+    fetch(`${uri}/allcomplain`, {
       method: "POST",
     })
       .then((res) => res.json())

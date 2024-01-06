@@ -22,7 +22,7 @@ function RefuseLogin() {
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, []);
-  return <>{!loading && <Outlet />}</>;
+  return <>{!loading ? <Outlet /> : <h1>Loading...</h1>}</>;
 }
 
 export default RefuseLogin;

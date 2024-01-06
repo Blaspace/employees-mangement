@@ -42,7 +42,7 @@ function Assignment() {
   console.log(userAssignment?.length);
 
   return (
-    <div style={{}} className="body">
+    <div className="body">
       <br />
       <br />
       {loading ? (
