@@ -27,14 +27,13 @@ function Signup() {
     })
       .then((res) => {
         if (res.ok) {
-          return res.json();
+          navigate("/login");
         } else if (res.status === 409) {
           throw "You already have an acount";
         } else {
           throw "Server Error";
         }
       })
-      .then((data) => navigate("/login"))
       .catch((err) => alert(err))
       .finally(() => {
         e.target.innerText = "Login";

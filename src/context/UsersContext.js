@@ -9,7 +9,7 @@ export function UsersProvider({ children }) {
   const [assignment, setAssignment] = useState([]);
   const [toggle, setToggle] = useState(false);
   const [notification, setNotification] = useState([]);
-  const { uri } = useContext(AuthContext);
+  const { uri, auth } = useContext(AuthContext);
 
   useEffect(() => {
     if (!user) {
@@ -21,7 +21,7 @@ export function UsersProvider({ children }) {
         .then((data) => setUser(data))
         .catch((err) => console.log(err));
     }
-  }, []);
+  }, [auth]);
 
   useEffect(() => {
     if (!users.length) {
